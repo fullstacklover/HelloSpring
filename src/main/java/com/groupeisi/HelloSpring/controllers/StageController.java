@@ -1,46 +1,45 @@
 package com.groupeisi.HelloSpring.controllers;
 
-import com.groupeisi.HelloSpring.entities.Etudiant;
-import com.groupeisi.HelloSpring.services.EtudiantService;
+import com.groupeisi.HelloSpring.entities.Stage;
+import com.groupeisi.HelloSpring.services.StageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/etudiants")
-public class EtudiantController {
+@RequestMapping("/api/stages")
+public class StageController {
 
-    private final EtudiantService service;
+    private final StageService service;
 
-    public EtudiantController(EtudiantService service) {
+    public StageController(StageService service) {
         this.service = service;
     }
 
     @GetMapping
-    public List<Etudiant> getAll() {
+    public List<Stage> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Etudiant> getById(@PathVariable Long id) {
-
+    public ResponseEntity<Stage> getById(@PathVariable Long id) {
         return service.getById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Etudiant create(@RequestBody Etudiant etudiant) {
-        return service.save(etudiant);
+    public Stage create(@RequestBody Stage stage) {
+        return service.save(stage);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Etudiant> update(
+    public ResponseEntity<Stage> update(
             @PathVariable Long id,
-            @RequestBody Etudiant etudiant) {
+            @RequestBody Stage stage) {
 
-        Etudiant updated = service.update(id, etudiant);
+        Stage updated = service.update(id, stage);
 
         if (updated == null) {
             return ResponseEntity.notFound().build();

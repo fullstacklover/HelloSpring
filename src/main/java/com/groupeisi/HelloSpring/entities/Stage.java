@@ -1,45 +1,37 @@
 package com.groupeisi.HelloSpring.entities;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "stages")
-public class Stage implements Serializable {
+public class Stage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "sujet_definitif", nullable = false)
-    private String sujetDefinitif;
+    private String titre;
+    private String description;
+    private String dateDebut;
+    private String dateFin;
 
-    @Column(name = "date_debut")
-    private LocalDate dateDebut;
+    @ManyToOne
+    @JoinColumn(name = "etudiant_id")
+    private Etudiant etudiant;
 
-    @Column(name = "date_fin")
-    private LocalDate dateFin;
-
-    @Column(name = "statut")
-    private String statut;
+    @ManyToOne
+    @JoinColumn(name = "entreprise_id")
+    private Entreprise entreprise;
 
     public Stage() {
     }
 
-    public Stage(String sujetDefinitif, LocalDate dateDebut, LocalDate dateFin, String statut) {
-        this.sujetDefinitif = sujetDefinitif;
+    public Stage(String titre, String description,
+                 String dateDebut, String dateFin) {
+        this.titre = titre;
+        this.description = description;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.statut = statut;
-    }
-
-    public Stage(Long id, String sujetDefinitif, LocalDate dateDebut, LocalDate dateFin, String statut) {
-        this.id = id;
-        this.sujetDefinitif = sujetDefinitif;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.statut = statut;
     }
 
     public Long getId() {
@@ -50,46 +42,51 @@ public class Stage implements Serializable {
         this.id = id;
     }
 
-    public String getSujetDefinitif() {
-        return sujetDefinitif;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setSujetDefinitif(String sujetDefinitif) {
-        this.sujetDefinitif = sujetDefinitif;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
-    public LocalDate getDateDebut() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
+    public void setDateDebut(String dateDebut) {
         this.dateDebut = dateDebut;
     }
 
-    public LocalDate getDateFin() {
+    public String getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
+    public void setDateFin(String dateFin) {
         this.dateFin = dateFin;
     }
 
-    public String getStatut() {
-        return statut;
+    public Etudiant getEtudiant() {
+        return etudiant;
     }
 
-    public void setStatut(String statut) {
-        this.statut = statut;
+    public void setEtudiant(Etudiant etudiant) {
+        this.etudiant = etudiant;
     }
 
-    @Override
-    public String toString() {
-        return "Stage{" +
-                "id=" + id +
-                ", sujetDefinitif='" + sujetDefinitif + '\'' +
-                ", dateDebut=" + dateDebut +
-                ", dateFin=" + dateFin +
-                ", statut='" + statut + '\'' +
-                '}';
+    public Entreprise getEntreprise() {
+        return entreprise;
+    }
+
+    public void setEntreprise(Entreprise entreprise) {
+        this.entreprise = entreprise;
     }
 }

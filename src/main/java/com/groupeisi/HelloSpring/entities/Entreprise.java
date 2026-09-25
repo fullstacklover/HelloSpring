@@ -10,8 +10,9 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Entreprise {
+
     @Id
-    @Column(unique = true,  nullable = false, length = 150)
+    @Column(unique = true, nullable = false, length = 150)
     private String raisonSociale;
 
     @Column(length = 150)
@@ -20,9 +21,9 @@ public class Entreprise {
     @Column(length = 200)
     private String adresse;
 
-    @Column(length = 70,  nullable = false)
+    @Column(length = 70, nullable = false)
     private String email;
 
-    @Column(length = 30,  nullable = false)
+    @Column(length = 30, nullable = false)
     private String telephone;
 }
